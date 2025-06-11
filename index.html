@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Voice Mail Forge</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 0; }
+    .container { display: flex; height: 100vh; }
+    .panel { flex: 1; padding: 20px; box-sizing: border-box; }
+    .left { background: #f0f0f0; border-right: 2px solid #ccc; }
+    .right { background: #fff; }
+    input, select, textarea { width: 100%; margin-bottom: 10px; padding: 8px; box-sizing: border-box; }
+    label { font-weight: bold; display: block; margin-top: 10px; }
+    .checkbox-group { display: flex; flex-direction: column; }
+    .buttons { margin-top: 10px; display: flex; gap: 10px; }
+    .output { white-space: pre-wrap; background: #eee; padding: 15px; min-height: 150px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="panel left">
+    <h2>📞 Voice Mail Forge</h2>
+
+    <label for="patient">Patient Name</label>
+    <input type="text" id="patient" placeholder="John Smith">
+
+    <label for="date">Date & Time</label>
+    <input type="datetime-local" id="datetime">
+
+    <label for="appt">Appointment Type</label>
+    <select id="appt">
+      <option>Physical</option>
+      <option>Follow-up</option>
+      <option>Consult</option>
+      <option>Labs</option>
+      <option>Other</option>
+    </select>
+
+    <label>Outcome</label>
+    <div class="checkbox-group">
+      <label><input type="checkbox" id="noAnswer"> No Answer</label>
+      <label><input type="checkbox" id="lineBusy"> Line Busy</label>
+      <label><input type="checkbox" id="voicemail"> Voicemail Left</label>
+      <label><input type="checkbox" id="mychart"> MyChart Message Sent</label>
+      <label><input type="checkbox" id="rescheduled"> Appointment Rescheduled</label>
+    </div>
+
+    <label for="newTime">New Appointment Time (if rescheduled)</label>
+    <input type="datetime-local" id="newTime">
+
+    <label for="notes">Free Text Notes</label>
+    <textarea id="notes" rows="4" placeholder="Optional shorthand..."></textarea>
+
+    <div class="buttons">
+      <button onclick="generateNote()">Generate Preview</button>
+      <button onclick="clearForm()">Clear</button>
+    </div>
+  </div>
+
+  <div class="panel right">
+    <h2>📋 Encounter Note</h2>
+    <div class="output" id="output">
+      (Generated encounter note will appear here.)
+    </div>
+    <div class="buttons">
+      <button onclick="copyToClipboard()">📋 Copy to Clipboard</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
